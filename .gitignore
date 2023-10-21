@@ -1,3 +1,12 @@
+# build output
+dist/
+
+# generated types
+.astro/
+
+# VSCode folder
+.vscode/
+
 # Logs
 logs
 *.log
@@ -76,6 +85,7 @@ web_modules/
 .env
 .env.development.local
 .env.test.local
+.env.production
 .env.production.local
 .env.local
 
@@ -128,3 +138,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# macOS-specific files
+.DS_Store
