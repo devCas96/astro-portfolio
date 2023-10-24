@@ -1,0 +1,98 @@
+@import url('./fonts.css');
+@import url('./reset.css');
+
+/* Global variables */
+:root {
+  /* General default variables */
+  --max-width: 1250px;
+  --default-font-weight: 400;
+  --default-font-stretch: 100%;
+
+
+  /* Colors */
+  --theme-base-color: #FFFFFF;
+  --theme-background-color: #000140;
+  --theme-main-color: #6CE4CF;
+
+  /* Fonts */
+  --font-cabin-base: 'Cabin', sans-serif;
+  --font-cabin-italic: 'Cabin-Italic', sans-serif;
+
+  /* Transitions */
+  --theme-transition: 0.2s ease-in-out;
+
+  /* Text Sizes */
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.625rem;
+  --text-2xl: 2.125rem;
+  --text-3xl: 2.625rem;
+  --text-4xl: 3.5rem;
+  --text-5xl: 4.5rem;
+}
+
+:root.theme-dark {}
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-cabin-base);
+  min-height: 100vh;
+  color: var(--theme-base-color);
+  background-color: var(--theme-background-color);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* a {
+  color: var(--link-color);
+} */
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  line-height: 1.1;
+  font-family: var(--font-brand);
+  font-weight: 600;
+  color: var(--gray-100);
+}
+
+h1 {
+  font-size: var(--text-5xl);
+}
+
+h2 {
+  font-size: var(--text-4xl);
+}
+
+h3 {
+  font-size: var(--text-3xl);
+}
+
+h4 {
+  font-size: var(--text-2xl);
+}
+
+h5 {
+  font-size: var(--text-xl);
+}

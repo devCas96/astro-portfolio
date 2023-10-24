@@ -1,0 +1,192 @@
+---
+import { Image } from 'astro:assets';
+import Logo from '../../assets/logo-devcas.svg';
+---
+
+<header class="header">
+  <a class="header__logo" href="#" rel="noreferrer noopener">
+    <Image
+      src={Logo}
+      width="200"
+      decoding="async"
+      loading="lazy"
+      alt="Logo Dev.Cas Portfolio"
+    />
+  </a>
+  <div class="header__options">
+    <nav class="header__nav">
+      <ul class="header__list">
+        <li class="header__item">
+          <a class="header__link" href="#about">About</a>
+        </li>
+        <li class="header__item">
+          <a class="header__link" href="#experience">Experience</a>
+        </li>
+        <li class="header__item">
+          <a class="header__link" href="#projects">Projects</a>
+        </li>
+        <li class="header__item">
+          <a class="header__link" href="#contact">Contact</a>
+        </li>
+      </ul>
+    </nav>
+    <select class="header__language">
+      <option value="ENG">English</option>
+      <option value="ESP">Español</option>
+    </select>
+  </div>
+</header>
+
+<style>
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95%;
+    margin: 0 auto;
+    z-index: 1;
+  }
+
+  .header__logo {
+    text-align: center;
+    margin: 1rem 0;
+  }
+
+  .header__title {
+    font-size: 2rem;
+  }
+
+  .header__options {
+    display: flex;
+    align-items: center;
+    gap: 7em;
+  }
+
+  .header__nav {
+  }
+
+  .header__list {
+    display: flex;
+    justify-content: center;
+    gap: 5em;
+  }
+
+  .header__list:hover {
+    transition: all 0.2s ease;
+    .header__item {
+      color: #a0a0a0;
+    }
+    .header__item:hover {
+      color: #ffffff;
+      box-shadow: 0 2px 0 0 currentcolor;
+      transition: all 0.2s ease;
+    }
+  }
+
+  .header__item {
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    font-family: var(--font-cabin-base);
+    font-size: var(--text-md);
+  }
+
+  .header__item::after,
+  .header__item::before {
+    position: absolute;
+    font-size: var(--text-xl);
+    color: var(--theme-main-color);
+    transition: all 0.2s ease;
+  }
+
+  .header__item::after {
+    content: '>';
+    opacity: 0;
+    right: -8px;
+  }
+
+  .header__item::before {
+    content: '<';
+    opacity: 0;
+    left: 5px;
+  }
+
+  .header__item:hover,
+  .header__item--active {
+    &::after,
+    &::before {
+      opacity: 1;
+    }
+
+    &::after {
+      animation: rightToLeftArrow 0.3s ease-in;
+    }
+
+    &::before {
+      animation: leftToRightArrow 0.3s ease-in;
+    }
+  }
+
+  .header__link {
+    padding: 10px 15px;
+  }
+
+  .header__link::after {
+    content: '/';
+    opacity: 0;
+    position: absolute;
+    right: 5px;
+    transition: all 0.2s ease;
+  }
+
+  .header__item:hover > .header__link::after,
+  .header__item--active > .header__link::after {
+    opacity: 0;
+    color: var(--theme-main-color);
+    animation: diagonalTopToBottom 0.3s linear 0.35s forwards;
+  }
+
+  .header__language {
+    background-color: var(--theme-main-color);
+    padding: 0.5em 1em;
+    border-radius: 15px;
+  }
+
+  @keyframes leftToRightArrow {
+    from {
+      opacity: 0;
+      left: -30px;
+    }
+    to {
+      opacity: 1;
+      left: 5px;
+    }
+  }
+
+  @keyframes rightToLeftArrow {
+    from {
+      opacity: 0;
+      right: -50px;
+    }
+    to {
+      opacity: 1;
+      right: -8px;
+    }
+  }
+
+  @keyframes diagonalTopToBottom {
+    from {
+      opacity: 0;
+      top: 0;
+      right: -20px;
+    }
+    to {
+      opacity: 1;
+      top: 10px;
+      right: 5px;
+    }
+  }
+</style>

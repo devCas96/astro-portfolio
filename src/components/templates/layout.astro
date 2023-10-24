@@ -1,0 +1,18 @@
+---
+import MainHead from '../organisms/main-head.astro';
+import MainHeader from '../organisms/main-header.astro';
+
+interface Props {
+  title?: string | undefined;
+  description?: string | undefined;
+}
+
+const { title, description } = Astro.props;
+---
+
+<html lang="en">
+  <MainHead title={title} description={description} />
+  <body>
+    <MainHeader />
+  </body>
+</html>

@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'Cabin';
+  src: url('/fonts/Cabin-VariableFont_wdth,wght.ttf') format('woff2');
+  font-weight: var(--default-font-weight);
+  font-stretch: var(--default-font-stretch);
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cabin-Italic';
+  src: url('/fonts/Cabin-Italic-VariableFont_wdth,wght.ttf') format('woff2');
+  font-weight: var(--default-font-weight);
+  font-stretch: var(--default-font-stretch);
+  font-style: normal;
+}
