@@ -1,0 +1,22 @@
+---
+import MainSectionAbout from '../../components/organisms/main-section-about.astro';
+import MainSectionIntro from '../../components/organisms/main-section-intro.astro';
+import MainSectionExperience from '../../components/organisms/main-section-experience.astro';
+import MainSectionProjects from '../../components/organisms/main-section-projects.astro';
+import MainSectionContact from '../../components/organisms/main-section-contact.astro';
+import Layout from '../../components/templates/layout.astro';
+import { Languages } from '../../constants/global';
+
+export function getStaticPaths() {
+  return Object.values(Languages).map((lang) => ({ params: { lang } }));
+}
+const { lang } = Astro.params;
+---
+
+<Layout language={lang}>
+  <MainSectionIntro language={lang} />
+  <MainSectionAbout />
+  <MainSectionExperience />
+  <MainSectionProjects />
+  <MainSectionContact />
+</Layout>

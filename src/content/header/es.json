@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "url": "#about",
+      "text": "Sobre mi"
+    },
+    {
+      "url": "#experience",
+      "text": "Experiencia"
+    },
+    {
+      "url": "#projects",
+      "text": "Proyectos"
+    },
+    {
+      "url": "#contact",
+      "text": "Contacto"
+    }
+  ]
+}

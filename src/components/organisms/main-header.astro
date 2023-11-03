@@ -1,6 +1,18 @@
 ---
+import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import Logo from '../../assets/logo-devcas.svg';
+import Select from '../molecules/select';
+
+interface Props {
+  language: string;
+}
+
+const { language } = Astro.props;
+const headerCollection = await getCollection('header');
+const headerByLanguage = headerCollection.find(
+  (info) => info.id === language
+)?.data;
 ---
 
 <header class="header">
@@ -16,24 +28,18 @@ import Logo from '../../assets/logo-devcas.svg';
   <div class="header__options">
     <nav class="header__nav">
       <ul class="header__list">
-        <li class="header__item">
-          <a class="header__link" href="#about">About</a>
-        </li>
-        <li class="header__item">
-          <a class="header__link" href="#experience">Experience</a>
-        </li>
-        <li class="header__item">
-          <a class="header__link" href="#projects">Projects</a>
-        </li>
-        <li class="header__item">
-          <a class="header__link" href="#contact">Contact</a>
-        </li>
+        {
+          headerByLanguage?.items.map((item) => (
+            <li class="header__item">
+              <a class="header__link" href={item.url}>
+                {item.text}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
-    <select class="header__language">
-      <option value="ENG">English</option>
-      <option value="ESP">Español</option>
-    </select>
+    <Select language={language} client:load />
   </div>
 </header>
 
@@ -60,9 +66,11 @@ import Logo from '../../assets/logo-devcas.svg';
     display: flex;
     align-items: center;
     gap: 7em;
-  }
-
-  .header__nav {
+    select {
+      border: 1px solid var(--theme-main-color);
+      padding: 0.5em 1em;
+      border-radius: 15px;
+    }
   }
 
   .header__list {
@@ -147,12 +155,6 @@ import Logo from '../../assets/logo-devcas.svg';
     opacity: 0;
     color: var(--theme-main-color);
     animation: diagonalTopToBottom 0.3s linear 0.35s forwards;
-  }
-
-  .header__language {
-    background-color: var(--theme-main-color);
-    padding: 0.5em 1em;
-    border-radius: 15px;
   }
 
   @keyframes leftToRightArrow {

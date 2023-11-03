@@ -4,14 +4,13 @@
 /* Global variables */
 :root {
   /* General default variables */
-  --max-width: 1250px;
+  --max-width: 1500px;
   --default-font-weight: 400;
   --default-font-stretch: 100%;
 
-
   /* Colors */
   --theme-base-color: #FFFFFF;
-  --theme-background-color: #000140;
+  --theme-background-color: #1A1A1A;
   --theme-main-color: #6CE4CF;
 
   /* Fonts */
@@ -38,16 +37,25 @@
 html,
 body {
   height: 100%;
-  overflow-x: hidden;
+  overflow: visible;
+  scroll-behavior: smooth;
 }
 
 body {
+  max-width: var(--max-width);
   font-family: var(--font-cabin-base);
   min-height: 100vh;
   color: var(--theme-base-color);
   background-color: var(--theme-background-color);
   -webkit-font-smoothing: antialiased;
   line-height: 1.5;
+  margin: 0 auto;
+}
+
+main {
+  width: 95%;
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 
 *,

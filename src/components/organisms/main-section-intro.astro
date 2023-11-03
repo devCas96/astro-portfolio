@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  language: string;
+}
+
+const { language } = Astro.props;
+
+const mainCollection = await getCollection('main');
+const introByLanguage = mainCollection.find(
+  (info) => info.slug === language
+)?.data;
+---
+
+<section class="main-intro">
+  <article class="main-intro__article">
+    <span class="main-intro__span">{introByLanguage?.greeting}</span>
+    <h1 class="main-intro__title">{introByLanguage?.title}</h1>
+    <h2 class="main-intro__subtitle">{introByLanguage?.subtitle}</h2>
+    <p class="main-intro__description">
+      {introByLanguage?.description}
+    </p>
+  </article>
+</section>
+
+<style>
+  .main-intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 80px);
+  }
+
+  .main-intro__article {
+    max-width: 60em;
+  }
+
+  .main-intro__span {
+    color: var(--theme-main-color);
+  }
+
+  .main-intro__title {
+    margin-top: 15px;
+  }
+
+  .main-intro__subtitle {
+    color: #6a7083;
+    margin-top: 5px;
+  }
+
+  .main-intro__description {
+    max-width: 40%;
+    color: #6a7083;
+    margin-top: 2em;
+  }
+</style>
