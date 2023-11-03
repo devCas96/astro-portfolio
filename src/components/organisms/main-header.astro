@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
+import SelectLanguage from '../_react/select-language/select-language.tsx';
 import Logo from '../../assets/logo-devcas.svg';
-import Select from '../molecules/select';
 
 interface Props {
   language: string;
@@ -15,23 +15,23 @@ const headerByLanguage = headerCollection.find(
 )?.data;
 ---
 
-<header class="header">
-  <a class="header__logo" href="#" rel="noreferrer noopener">
+<header class='header'>
+  <a class='header__logo' href='#' rel='noreferrer noopener'>
     <Image
       src={Logo}
-      width="200"
-      decoding="async"
-      loading="lazy"
-      alt="Logo Dev.Cas Portfolio"
+      width='200'
+      decoding='async'
+      loading='lazy'
+      alt='Logo Dev.Cas Portfolio'
     />
   </a>
-  <div class="header__options">
-    <nav class="header__nav">
-      <ul class="header__list">
+  <div class='header__options'>
+    <nav class='header__nav'>
+      <ul class='header__list'>
         {
           headerByLanguage?.items.map((item) => (
-            <li class="header__item">
-              <a class="header__link" href={item.url}>
+            <li class='header__item'>
+              <a class='header__link' href={item.url}>
                 {item.text}
               </a>
             </li>
@@ -39,7 +39,7 @@ const headerByLanguage = headerCollection.find(
         }
       </ul>
     </nav>
-    <Select language={language} client:load />
+    <SelectLanguage language={language} client:load />
   </div>
 </header>
 
