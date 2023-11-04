@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { throttle } from '../../../utils/throttle';
+import { throttleTimer } from '../../../constants/global';
 import './button-go-top.css';
 
 export default function ButtonGoTop() {
@@ -7,10 +8,10 @@ export default function ButtonGoTop() {
 
   const checkerScrollY = throttle(() => {
     const scrolledY = window.scrollY;
-    const viewHeight = window.innerHeight;
+    const viewHeight = window.innerHeight - 100;
 
     setButtonVisible(scrolledY > viewHeight);
-  }, 200);
+  }, throttleTimer);
 
   const handleToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 

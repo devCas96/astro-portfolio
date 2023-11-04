@@ -9,8 +9,8 @@
   --default-font-stretch: 100%;
 
   /* Colors */
-  --theme-base-color: #FFFFFF;
-  --theme-background-color: #1A1A1A;
+  --theme-base-color: #1A1A1A;
+  --theme-background-color: #FFFFFF;
   --theme-main-color: #6CE4CF;
 
   /* Fonts */
@@ -18,7 +18,7 @@
   --font-cabin-italic: 'Cabin-Italic', sans-serif;
 
   /* Transitions */
-  --theme-transition: 0.2s ease-in-out;
+  --theme-transition: 0.2s ease;
 
   /* Text Sizes */
   --text-sm: 0.875rem;
@@ -30,9 +30,14 @@
   --text-3xl: 2.625rem;
   --text-4xl: 3.5rem;
   --text-5xl: 4.5rem;
+
 }
 
-:root.theme-dark {}
+:root.theme-dark {
+  --theme-base-color: #FFFFFF;
+  --theme-background-color: #1A1A1A;
+  --theme-main-color: #6CE4CF;
+}
 
 html,
 body {

@@ -1,0 +1,98 @@
+---
+import { Image } from 'astro:assets';
+import IconSun from '../../assets/icons/icon-sun.svg';
+import IconMoon from '../../assets/icons/icon-moon.svg';
+---
+
+<theme-toggle>
+  <button class='button-theme'>
+    <span class='button-theme__item light'
+      ><Image src={IconSun} alt='Sun theme' width={40} height={40} /></span
+    >
+    <span class='button-theme__item dark'
+      ><Image src={IconMoon} alt='Moon theme' width={40} height={50} /></span
+    >
+  </button>
+</theme-toggle>
+
+<style>
+  .button-theme {
+    position: fixed;
+    left: 0.5em;
+    top: 45vh;
+    display: flex;
+    flex-flow: column;
+    border: 0;
+    border-radius: 999rem;
+    background-color: #ffffff;
+    padding: 0;
+    box-shadow: inset 0 0 0 1px var(--theme-main-color);
+    cursor: pointer;
+  }
+
+  .button-theme__item {
+    z-index: 1;
+    position: relative;
+    display: flex;
+    padding: 0.6rem;
+    width: 50px;
+    height: 50px;
+  }
+
+  .button-theme__item.light::before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    inset: 0;
+    background-color: var(--theme-main-color);
+    border-radius: 999rem;
+  }
+
+  :global(.theme-dark) .button-theme__item.light::before {
+    transform: translateY(100%);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .button-theme__item,
+    .button-theme__item.light::before {
+      transition:
+        transform 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045),
+        color var(--theme-transition);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .button-theme__item.light::before {
+      background-color: SelectedItem;
+    }
+  }
+</style>
+
+<script>
+  class ThemeToggle extends HTMLElement {
+    constructor() {
+      super();
+
+      const button = this.querySelector('button')!;
+
+      /** Set the theme to dark/light mode. */
+      const setTheme = (dark: boolean) => {
+        document.documentElement.classList[dark ? 'add' : 'remove'](
+          'theme-dark'
+        );
+        button.setAttribute('aria-pressed', String(dark));
+      };
+
+      // Toggle the theme when a user clicks the button.
+      button.addEventListener('click', () => setTheme(!this.isDark()));
+
+      // Initialize button state to reflect current theme.
+      setTheme(this.isDark());
+    }
+
+    isDark() {
+      return document.documentElement.classList.contains('theme-dark');
+    }
+  }
+  customElements.define('theme-toggle', ThemeToggle);
+</script>
