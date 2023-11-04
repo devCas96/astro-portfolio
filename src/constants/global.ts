@@ -1,4 +1,4 @@
-export const throttleTimer = 200;
+export const throttleTimer: number = 200;
 
 export enum SocialMedia {
   GITHUB = 'https://github.com/devCas96/',
