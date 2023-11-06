@@ -1,17 +1,15 @@
 ---
-import { Image } from 'astro:assets';
-import IconSun from '../../assets/icons/icon-sun.svg';
-import IconMoon from '../../assets/icons/icon-moon.svg';
+import Icon from '../atoms/icon.astro';
 ---
 
 <theme-toggle>
   <button class='button-theme'>
-    <span class='button-theme__item light'
-      ><Image src={IconSun} alt='Sun theme' width={40} height={40} /></span
-    >
-    <span class='button-theme__item dark'
-      ><Image src={IconMoon} alt='Moon theme' width={40} height={50} /></span
-    >
+    <span class='button-theme__item light'>
+      <Icon color='gray' icon='sun' size='40px' />
+    </span>
+    <span class='button-theme__item dark'>
+      <Icon color='gray' icon='moon' size='40px' />
+    </span>
   </button>
 </theme-toggle>
 
@@ -24,7 +22,7 @@ import IconMoon from '../../assets/icons/icon-moon.svg';
     flex-flow: column;
     border: 0;
     border-radius: 999rem;
-    background-color: #ffffff;
+    background-color: #00000;
     padding: 0;
     box-shadow: inset 0 0 0 1px var(--theme-main-color);
     cursor: pointer;
@@ -35,8 +33,18 @@ import IconMoon from '../../assets/icons/icon-moon.svg';
     position: relative;
     display: flex;
     padding: 0.6rem;
-    width: 50px;
-    height: 50px;
+    > svg {
+      transition: all 0.2s linear;
+      transform: scale(0.6);
+    }
+  }
+
+  .button-theme[aria-pressed='false'] .button-theme__item.light {
+    > svg {
+      transition: all 0.2s linear;
+      fill: #ffb700;
+      transform: scale(1) rotate(200deg);
+    }
   }
 
   .button-theme__item.light::before {
@@ -44,10 +52,19 @@ import IconMoon from '../../assets/icons/icon-moon.svg';
     z-index: -1;
     position: absolute;
     inset: 0;
-    background-color: var(--theme-main-color);
+    background-color: currentColor;
     border-radius: 999rem;
   }
 
+  :global(.theme-dark)
+    .button-theme[aria-pressed='true']
+    .button-theme__item.dark {
+    > svg {
+      transition: all 0.3s linear;
+      fill: #181832;
+      transform: scale(1) rotate(360deg);
+    }
+  }
   :global(.theme-dark) .button-theme__item.light::before {
     transform: translateY(100%);
   }
@@ -72,26 +89,33 @@ import IconMoon from '../../assets/icons/icon-moon.svg';
   class ThemeToggle extends HTMLElement {
     constructor() {
       super();
-
       const button = this.querySelector('button')!;
 
       /** Set the theme to dark/light mode. */
-      const setTheme = (dark: boolean) => {
-        document.documentElement.classList[dark ? 'add' : 'remove'](
+      const setTheme = (isDark: boolean) => {
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+        document.documentElement.classList[isDark ? 'add' : 'remove'](
           'theme-dark'
         );
-        button.setAttribute('aria-pressed', String(dark));
+        button.setAttribute('aria-pressed', String(isDark));
       };
 
       // Toggle the theme when a user clicks the button.
-      button.addEventListener('click', () => setTheme(!this.isDark()));
+      button.addEventListener('click', () => setTheme(!this.checkTheme()));
 
       // Initialize button state to reflect current theme.
-      setTheme(this.isDark());
+      setTheme(this.checkTheme());
     }
 
-    isDark() {
-      return document.documentElement.classList.contains('theme-dark');
+    checkTheme() {
+      let currentTheme = localStorage.getItem('theme');
+
+      if (currentTheme === null) {
+        localStorage.setItem('theme', 'light');
+      }
+
+      return currentTheme === 'dark';
     }
   }
   customElements.define('theme-toggle', ThemeToggle);

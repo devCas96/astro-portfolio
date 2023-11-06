@@ -1,3 +1,4 @@
+export const MAIN_LOGO_TEXT: string = "DEV.CAS";
 export const throttleTimer: number = 200;
 
 export enum SocialMedia {

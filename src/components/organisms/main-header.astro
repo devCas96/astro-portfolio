@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
 import SelectLanguage from '../_react/select-language/select-language.tsx';
-import Logo from '../../assets/logo-devcas.svg';
+import Icon from '../atoms/icon.astro';
+import { MAIN_LOGO_TEXT } from '../../constants/global';
 
 interface Props {
   language: string;
@@ -17,13 +17,8 @@ const headerByLanguage = headerCollection.find(
 
 <header class='header'>
   <a class='header__logo' href='#' rel='noreferrer noopener'>
-    <Image
-      src={Logo}
-      width='200'
-      decoding='async'
-      loading='lazy'
-      alt='Logo Dev.Cas Portfolio'
-    />
+    <Icon icon='main-icon' size='50px' />
+    <label for='header__logo'>{MAIN_LOGO_TEXT}</label>
   </a>
   <div class='header__options'>
     <nav class='header__nav'>
@@ -56,6 +51,23 @@ const headerByLanguage = headerCollection.find(
   .header__logo {
     text-align: center;
     margin: 1rem 0;
+    display: flex;
+    align-items: center;
+  }
+
+  label {
+    font: bold var(--text-xl) var(--font-cabin-base);
+    padding-left: 1em;
+    position: relative;
+  }
+
+  label::before {
+    content: '';
+    position: absolute;
+    left: 0.5em;
+    border-radius: 25px;
+    border: 1.5px solid currentColor;
+    height: 100%;
   }
 
   .header__title {
