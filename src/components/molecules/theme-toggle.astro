@@ -55,6 +55,13 @@ import Icon from '../atoms/icon.astro';
     border-radius: 999rem;
   }
 
+  :global(.theme-dark) body {
+    opacity: 1;
+    transition:
+      opacity 0.5s ease,
+      background-color 0.5s ease;
+  }
+
   :global(.theme-dark)
     .button-theme[aria-pressed='true']
     .button-theme__item.dark {
