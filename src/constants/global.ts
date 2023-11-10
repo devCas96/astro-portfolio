@@ -10,3 +10,11 @@ export enum Languages {
   ESP = 'es',
   ENG = 'en'
 }
+
+export enum CollectionsNames {
+  ABOUT = 'about',
+  EXPERIENCE = 'experience',
+  HEADER = 'header',
+  PROJECTS = 'projects',
+  MAIN = 'main',
+}

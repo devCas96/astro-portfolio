@@ -1,18 +1,22 @@
 ---
+import { type CollectionEntry } from 'astro:content';
+import { getContentEntry } from '../../utils/collection-handler';
+import { CollectionsNames } from '../../constants/global';
 
+interface Props {
+  language: string;
+}
+
+const { language } = Astro.props;
+const { data: aboutCollection }: CollectionEntry<CollectionsNames.ABOUT> =
+  await getContentEntry(CollectionsNames.ABOUT, language);
 ---
 
-<section class="main-about" id="about">
+<section class='main-about' id='about'>
   <article>
-    <h2>About me <hr /></h2>
+    <h2>{aboutCollection?.title} <hr /></h2>
     <p>
-      Software Developer for around six years. Last four years more focused on
-      front-end development loving to make UI components with a good user
-      experience. Strong skills with ReactJS, Javascript, HTML, CSS, and CSS
-      preprocessors such as Less and Sass. Also experienced with Typescript,
-      Redux, GatsbyJS, NextJS, node.js, GraphQL, Jquery, Atomic Design, Micro
-      front-ends (Github Submodules Approach), some continuous integration and
-      continuous delivery tools such as CircleCI, and Jenkins and contentful CMS
+      {aboutCollection?.description}
     </p>
   </article>
 </section>

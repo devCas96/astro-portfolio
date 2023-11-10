@@ -1,18 +1,22 @@
 ---
+import type { CollectionEntry } from 'astro:content';
+import { CollectionsNames } from '../../constants/global';
+import { getContentEntry } from '../../utils/collection-handler';
+interface Props {
+  language: string;
+}
 
+const { language } = Astro.props;
+
+const { data: projectsCollection }: CollectionEntry<CollectionsNames.PROJECTS> =
+  await getContentEntry(CollectionsNames.PROJECTS, language);
 ---
 
-<section class="main-projects" id="projects">
+<section class='main-projects' id='projects'>
   <article>
-    <h2>Projects<hr /></h2>
+    <h2>{projectsCollection.title}<hr /></h2>
     <p>
-      Software Developer for around six years. Last four years more focused on
-      front-end development loving to make UI components with a good user
-      experience. Strong skills with ReactJS, Javascript, HTML, CSS, and CSS
-      preprocessors such as Less and Sass. Also experienced with Typescript,
-      Redux, GatsbyJS, NextJS, node.js, GraphQL, Jquery, Atomic Design, Micro
-      front-ends (Github Submodules Approach), some continuous integration and
-      continuous delivery tools such as CircleCI, and Jenkins and contentful CMS
+      {projectsCollection.description}
     </p>
   </article>
 </section>

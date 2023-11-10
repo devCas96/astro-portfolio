@@ -1,18 +1,17 @@
 ---
-import { getCollection } from 'astro:content';
-import SelectLanguage from '../_react/select-language/select-language.tsx';
+import type { CollectionEntry } from 'astro:content';
+import { CollectionsNames, MAIN_LOGO_TEXT } from '../../constants/global';
+import SelectLanguage from '../_react/select-language/select-language';
+import { getDataEntry } from '../../utils/collection-handler';
 import Icon from '../atoms/icon.astro';
-import { MAIN_LOGO_TEXT } from '../../constants/global';
-
 interface Props {
   language: string;
 }
 
 const { language } = Astro.props;
-const headerCollection = await getCollection('header');
-const headerByLanguage = headerCollection.find(
-  (info) => info.id === language
-)?.data;
+
+const { data: headerCollection }: CollectionEntry<CollectionsNames.HEADER> =
+  await getDataEntry(CollectionsNames.HEADER, language);
 ---
 
 <header class='header'>
@@ -24,7 +23,7 @@ const headerByLanguage = headerCollection.find(
     <nav class='header__nav'>
       <ul class='header__list'>
         {
-          headerByLanguage?.items.map((item) => (
+          headerCollection?.items.map((item) => (
             <li class='header__item'>
               <a class='header__link' href={item.url}>
                 {item.text}
@@ -78,7 +77,7 @@ const headerByLanguage = headerCollection.find(
     display: flex;
     align-items: center;
     gap: 7em;
-    select {
+    > select {
       border: 1px solid var(--theme-main-color);
       padding: 0.5em 1em;
       border-radius: 15px;
@@ -97,7 +96,7 @@ const headerByLanguage = headerCollection.find(
       color: #a0a0a0;
     }
     .header__item:hover {
-      color: #ffffff;
+      color: currentColor;
       box-shadow: 0 2px 0 0 currentcolor;
       transition: all 0.2s ease;
     }

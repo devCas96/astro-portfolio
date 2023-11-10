@@ -10,7 +10,7 @@
 
   /* Colors */
   --theme-base-color: #1A1A1A;
-  --theme-background-color: #FFFFFF;
+  --theme-background-color: #F5F5F5;
   --theme-main-color: #6CE4CF;
 
   /* Fonts */
@@ -34,7 +34,7 @@
 }
 
 :root.theme-dark {
-  --theme-base-color: #FFFFFF;
+  --theme-base-color: #F5F5F5;
   --theme-background-color: #1A1A1A;
   --theme-main-color: #6CE4CF;
 }

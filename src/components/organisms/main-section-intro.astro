@@ -1,25 +1,24 @@
 ---
-import { getCollection } from 'astro:content';
-
+import type { CollectionEntry } from 'astro:content';
+import { CollectionsNames } from '../../constants/global';
+import { getContentEntry } from '../../utils/collection-handler';
 interface Props {
   language: string;
 }
 
 const { language } = Astro.props;
 
-const mainCollection = await getCollection('main');
-const introByLanguage = mainCollection.find(
-  (info) => info.slug === language
-)?.data;
+const { data: mainCollection }: CollectionEntry<CollectionsNames.MAIN> =
+  await getContentEntry(CollectionsNames.MAIN, language);
 ---
 
-<section class="main-intro">
-  <article class="main-intro__article">
-    <span class="main-intro__span">{introByLanguage?.greeting}</span>
-    <h1 class="main-intro__title">{introByLanguage?.title}</h1>
-    <h2 class="main-intro__subtitle">{introByLanguage?.subtitle}</h2>
-    <p class="main-intro__description">
-      {introByLanguage?.description}
+<section class='main-intro'>
+  <article class='main-intro__article'>
+    <span class='main-intro__span'>{mainCollection?.greeting}</span>
+    <h1 class='main-intro__title'>{mainCollection?.title}</h1>
+    <h2 class='main-intro__subtitle'>{mainCollection?.subtitle}</h2>
+    <p class='main-intro__description'>
+      {mainCollection?.description}
     </p>
   </article>
 </section>
